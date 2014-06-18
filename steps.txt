@@ -65,14 +65,19 @@ var IndexCtrl = function($scope){
 ```
 
 
-#### Set the controller_name in the layout. 
-     Adding the controller_name below we look for a file, main.js, as a js asset.
+#### Set the controller_name in the layout. _(Used later)_
+ Adding the controller_name below we look for a file, main.js, as a js asset.
 
-...
+```
 <%= javascript_include_tag "application", controller_name %>
+```
 
 ### Create a js file loaded when the Main controller is loaded.
+Nothing in here for now.
+
+```
 touch app/assets/javascript/main.js
+```
 
 ### Create an initializer for main.js
        config/initializers/assets.rb that will load the main.js.
