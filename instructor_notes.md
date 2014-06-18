@@ -115,3 +115,17 @@ _Nothing in here for now._
 	Rails.application.config.assets.precompile += %w( main.js )
 	```
 	
+## Cleanup asset files.  
+Let's stop slurping up all the javascript assets and _explicitly_ name our dependencies.
+
+* Remove the require_tree from the application.js
+* Add explicity dependencies to the main.js.  
+
+	```
+	//= require_self
+	//= require_tree ./controllers/main
+	//= require_tree ./filters/main
+	//= require_tree ./directives/main
+	//= require_tree ./services/main
+	```
+
