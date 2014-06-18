@@ -129,3 +129,66 @@ Let's stop slurping up all the javascript assets and _explicitly_ name our depen
 	//= require_tree ./services/main
 	```
 
+## Add a Rails root
+```
+  root to: 'main#index'
+```
+
+## Add a Angular module
+The Angular module will provide a namespace and a container for you application components, (services, controllers, etc.).
+
+It is also where you will identify your dependencies. Below, we are creating a module ProductsApp that depends on the ngRoute library.
+
+* Add this to main.js
+	```
+	var ProductsApp = angular.module('ProductsApp', ['ngRoute']);
+	```
+* Add this to your Rails layout. This will indicate the app module.
+	```
+	<html ng-app="ProductsApp">
+	```
+	
+	
+## Create a View Template
+A view template acts somewhat like an ERB view in rails. It is what gets rendered when you go to a Angular route.
+
+* Create a directory for view templates
+	```
+	mkdir app/assets/templates
+	```
+* Create a view template, mainIndex.html, in this templates dir.  
+
+	```
+	<h1 class="text-center">My Product</h1>
+	<!-- ng-repeat will create the below html for each product -->
+	<div class="row" ng-repeat="product in products">
+	  <h2>{{ product.name }}</h2>
+	  <p>{{ product.description }}</p>
+	</div>
+	```
+* Update the Rails Main index view in app/views/main/index.html.erb.  
+
+	```
+	<div class="container" ng-view>
+	</div>
+	```  
+* Create an Angular route for this view in the main.js file.
+	This is our first Angular route. This will get invoked when the application is initialized by Angular.
+	
+	The _$routeProvider.otherwise_ is a default route in angular. It's indicates that where the view template is located and the angular controller to use.
+
+	```
+	ProductsApp.config(['$routeProvider', function($routeProvider){
+    	// default route                                                            
+ 	   $routeProvider.otherwise({
+		templateUrl: '../assets/mainIndex.html',
+		controller: 'IndexCtrl'
+	    });
+	}]);
+	```
+
+Notice that we have moved the _view_ code from a Rails view, index.html.erb, to an Angular view template, mainIndex.html.
+
+	
+
+	
