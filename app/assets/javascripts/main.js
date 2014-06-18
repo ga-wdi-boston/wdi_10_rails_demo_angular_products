@@ -3,3 +3,5 @@
 //= require_tree ./filters/main
 //= require_tree ./directives/main
 //= require_tree ./services/main
+
+var ProductsApp = angular.module('ProductsApp', ['ngRoute']);
