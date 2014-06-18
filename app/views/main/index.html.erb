@@ -1,3 +1,8 @@
-<div ng-controller="IndexCtrl">
-  <h1>{{ title }}</h1>
+<div class="container" ng-controller="IndexCtrl">
+  <h1 class="text-center">My Product</h1>
+  <!-- ng-repeat will create the below html for each product -->
+  <div class="row" ng-repeat="product in products">
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+  </div>
 </div>
