@@ -257,7 +257,6 @@ The user will:
 4. The Product controller will get invoked, because it's mapped to the route #/product/:productId.  
 5. The Product controller will get the productId from the route using the $routeParams service.  
 6. The Product controller will set the productId in it's $scope.  
-7. The
 
 * Update the route for a product in the main.js
 
