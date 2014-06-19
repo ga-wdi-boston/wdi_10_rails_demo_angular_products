@@ -295,7 +295,9 @@ The user will:
 	
 ## Create a Product API.
 
-* Generate a Product model.  
+### Generate a Product model.  
+
+* Rails generator.  
 
 	```
  	rails g model Product name:string description:text price:decimal 
@@ -322,4 +324,50 @@ The user will:
 	  Product.create(name: "Product #{i}", description: "This is product #{i}", price: (rand(100).to_f + (rand(100)/100.00)) )
 	end
 	```
-* 	
+
+#### Create a Products Controller.
+
+```
+class ProductsController < ApplicationController
+  respond_to :json
+
+  def index
+    @products = Product.all
+    respond_with(@products) do |format|
+      format.json { render :json => @products, :root => false }
+    end
+  end
+
+  def show
+    @product = Product.find(params[:id])
+    respond_with(@product) do |format|
+      format.json { render :json => @product}
+    end
+  end
+
+end
+```
+
+#### Create a route.  
+For one and all Products.
+
+```
+resources :products, only: [:index, :show ]
+```
+
+
+#### Customize the Product API output.
+* Install the active model serializer gem.
+	```
+	gem 'active_model_serializers'
+	```
+* Generate a Serializer.
+	```
+	rails g serializer Product id name description price images
+	```
+* Test it with curl.  
+	Should see only the serialized attributes.
+
+	```
+	curl http://localhost:3001/products
+	```
