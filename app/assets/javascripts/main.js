@@ -4,4 +4,12 @@
 //= require_tree ./directives/main
 //= require_tree ./services/main
 
-alert('loading the main.js file');
+var ProductsApp = angular.module('ProductsApp', ['ngRoute']); 
+
+ProductsApp.config(['$routeProvider', function($routeProvider){
+    // default route                                                            
+   $routeProvider.otherwise({
+    templateUrl: '../assets/mainIndex.html',
+    controller: 'IndexCtrl'
+    });
+}]);
