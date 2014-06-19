@@ -112,3 +112,14 @@ Update the main index template, app/templates/mainProduct.html.
 ```
 	<div class="row" ng-repeat="product in data.products">
 ```
+
+
+#### Post Controller should loadProducts from API.
+In the controllers/main/mainPostCtrl.js change two lines.
+
+
+```
+ $scope.product = productData.products[$routeParams.productId];
+
+ productData.loadProducts();
+```
