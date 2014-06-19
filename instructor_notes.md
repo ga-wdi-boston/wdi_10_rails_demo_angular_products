@@ -149,8 +149,10 @@ It is also where you will identify your dependencies. Below, we are creating a m
 	```
 	
 	
-## Create a View Template
+## Create a Products View Template
 A view template acts somewhat like an ERB view in rails. It is what gets rendered when you go to a Angular route.
+
+Here we are going to create an angular view template that will show all of the products.
 
 * Create a directory for view templates
 	```
@@ -189,6 +191,59 @@ A view template acts somewhat like an ERB view in rails. It is what gets rendere
 
 Notice that we have moved the _view_ code from a Rails view, index.html.erb, to an Angular view template, mainIndex.html.
 
-	
 
+## Create a View Template for a Product.
+This will create a view template to show __one__ product.
+
+* Create a angular controller to view one Product in controllers/main/mainProductCtrl.js.  
+
+	This will _ONLY_ view a static product, _for now_.
+
+	```
+	var ProductCtrl  = function($scope) {
+    $scope.product = {name: 'Flask', description: 'Red Leather', price: 23.00 };
+
+	};
+	```
+* Create a view template, app/assets/template/mainProduct.html, for one product.
+
+	```
+	<h1 class="text-center">{{ product.name }}</h1>
+	<div class="row">
+    	<p>{{ product.description }}</p>
+	</div>
+	```
+* Create a product route in main.js to view one product.
+
+	```
+	 // Route for '/product'                                                     
+    $routeProvider.when('/product', {
+        templateUrl: '../assets/mainProduct.html',
+        controller: 'ProductCtrl'
+    });
+	```
 	
+* Create a click handler to view one product.  
+	In the template/mainIndex.html change this line.
+
+	The ng-click directive will stop the browser from redirecting the page.  
+
+
+	```
+	<h2><a ng-click="viewProduct()">{{ product.name }}</a></h2>
+	```
+
+* Create the handler function, _viewProduct_, in the controllers/main/mainIndexCtrl.js.  
+	
+	Notice how we _injected_ the $location _service_ into this controller. It starts the path with the '#' to prevent the browser from doing a page reload from the server.
+
+	```
+	var IndexCtrl = function($scope, $location){
+	 
+	 ...
+	 
+	 $scope.viewProduct = function(){
+        $location.url('/product');
+
+    };
+	```
