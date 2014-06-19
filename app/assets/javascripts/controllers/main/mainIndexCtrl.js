@@ -9,5 +9,8 @@ var IndexCtrl = function($scope){
   {name: 'USB Plug', description: 'For your phone', price: 11.99}
   ];
 
+  $scope.viewProduct = function(){
+    $location.url('/product');
+  };
   
 }
