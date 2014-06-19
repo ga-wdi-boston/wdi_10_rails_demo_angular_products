@@ -1,8 +1,6 @@
-var IndexCtrl = function($scope, $location, $http){
+var IndexCtrl = function($scope, $location, $http, productData){
     // Create a set of products
-    $scope.products = [
-        {name: 'Loading Products...', description: '', price: 149.99}
-    ];
+    $scope.products = productData;
 
     productsHandler = function(data){
         $scope.products = data
@@ -19,7 +17,7 @@ var IndexCtrl = function($scope, $location, $http){
             .error(errorHandler)
     };
 
-    loadPosts();
+    //loadPosts();
 
     $scope.viewProduct = function(productId){
         $location.url('/product/'+productId);
