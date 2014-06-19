@@ -293,3 +293,33 @@ The user will:
 	<h1 class="text-center">{{ productId}} - {{ product.name }}</h1>
 	```
 	
+## Create a Product API.
+
+* Generate a Product model.  
+
+	```
+ 	rails g model Product name:string description:text price:decimal 
+	```
+* Update the Product migration.
+
+	```
+	create_table :products do |t|
+      t.string :name
+      t.text :description
+      t.decimal :price, precision: 8, scale: 2
+      t.text :images, array: true, default: []
+      t.timestamps
+    end
+
+	```
+
+* Create the DB and migrate.
+* Set the seed data and populate the DB.
+	
+	```
+	Product.delete_all
+	5.times do |i|
+	  Product.create(name: "Product #{i}", description: "This is product #{i}", price: (rand(100).to_f + (rand(100)/100.00)) )
+	end
+	```
+* 	
