@@ -247,3 +247,49 @@ This will create a view template to show __one__ product.
 
     };
 	```
+## Route parameters
+Here we will setup a route parameter for a product.
+
+The user will:  
+1. Click on a product title.  
+2. The click handler will get called with the index set by the ng-repeat directive.  
+3. The click handler will get this index and set the URL to the #/product/<index>. _Note: the index here is being used as a product id._  
+4. The Product controller will get invoked, because it's mapped to the route #/product/:productId.  
+5. The Product controller will get the productId from the route using the $routeParams service.  
+6. The Product controller will set the productId in it's $scope.  
+7. The
+
+* Update the route for a product in the main.js
+
+	```
+	 $routeProvider.when('/product/:productId', {
+	```
+* Add a index/offset that we'll send to the click handler. We'll use this as product ID.     
+
+	```
+	<!-- The $index is provided by the ng-repeat directive -->
+  	<!-- It gives you the index/offset of the current product. -->
+ 	<h2><a ng-click="viewProduct($index)">{{ product.name }}</a></h2>
+		
+	```
+* Update the click handler to accept a Product ID and set it in the URL.	
+
+	```
+ 	$scope.viewProduct = function(productId){
+        $location.url('/product/'+productId);
+    };
+    ```
+* Update the Product controller to use the $routeParams service and make it available to the product view.
+
+	```
+	var ProductCtrl  = function($scope, $routeParams) {
+	...
+	$scope.productId = $routeParams.productId;
+	```
+	
+* Update the product view to show the product Id.  
+
+	```
+	<h1 class="text-center">{{ productId}} - {{ product.name }}</h1>
+	```
+	

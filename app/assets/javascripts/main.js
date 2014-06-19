@@ -8,7 +8,7 @@ var ProductsApp = angular.module('ProductsApp', ['ngRoute']);
 
 ProductsApp.config(['$routeProvider', function($routeProvider){
     // Route for '/product'
-    $routeProvider.when('/product', {
+    $routeProvider.when('/product/:productId', {
         templateUrl: '../assets/mainProduct.html',
         controller: 'ProductCtrl'
     });
