@@ -4,8 +4,10 @@
 angular.module('ProductsApp').factory('productData', ['$http', function($http){
 
     var productData = {
-        products:  [{name: 'Initializing Products...', description: '', price: 149.99}]
+        products:  [{name: 'Initializing Products...', description: '', price: 149.99}],
+        isLoaded: false
     };
+
     productsHandler = function(data){
         productData.products = data
         console.log('Successfully loaded products.')
@@ -16,9 +18,13 @@ angular.module('ProductsApp').factory('productData', ['$http', function($http){
     };
 
     productData.loadProducts = function(){
-        $http.get('./products.json')
-            .success(productsHandler)
-            .error(errorHandler)
+        // Only load data if it has not been loaded already
+        if(!productData.isLoaded){
+
+            $http.get('./products.json')
+                .success(productsHandler)
+                .error(errorHandler);
+        }
     };
 
     return productData;

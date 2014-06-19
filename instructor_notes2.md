@@ -123,3 +123,26 @@ In the controllers/main/mainPostCtrl.js change two lines.
 
  productData.loadProducts();
 ```
+
+#### Call API for Product JSON once.
+This will prevent reloading data when we switch views.
+
+```
+var productData = {
+        products:  [{name: 'Initializing Products...', description: '', price: \
+149.99}],
+        isLoaded: false
+    };
+    
+...
+    
+productData.loadProducts = function(){
+        // Only load data if it has not been loaded already                     
+	if(!productData.isLoaded){
+
+            $http.get('./products.json')
+                .success(productsHandler)
+	        .error(errorHandler);
+        }
+    };
+```
