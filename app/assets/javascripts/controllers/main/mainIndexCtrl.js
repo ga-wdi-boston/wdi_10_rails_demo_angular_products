@@ -1,11 +1,25 @@
-var IndexCtrl = function($scope, $location){
+var IndexCtrl = function($scope, $location, $http){
     // Create a set of products
     $scope.products = [
-        {name: 'Black Boot', description: 'We will crush you', price: 149.99},
-        {name: 'Television', description: '52 in', price: 599.00},
-        {name: 'Fishcake', description: 'Fish in a cake', price: 15.00},
-        {name: 'USB Plug', description: 'For your phone', price: 11.99}
+        {name: 'Loading Products...', description: '', price: 149.99}
     ];
+
+    productsHandler = function(data){
+        $scope.products = data
+        console.log('Successfully loaded products.')
+    };
+
+    errorHandler = function(){
+        console.error('Failed to load products.');        
+    };
+
+    loadPosts = function(){
+        $http.get('./products.json')
+            .success(productsHandler)
+            .error(errorHandler)
+    };
+
+    loadPosts();
 
     $scope.viewProduct = function(productId){
         $location.url('/product/'+productId);

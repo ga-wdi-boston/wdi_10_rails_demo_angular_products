@@ -371,3 +371,37 @@ resources :products, only: [:index, :show ]
 	```
 	curl http://localhost:3001/products
 	```
+
+### Get Products from Rails API.
+
+Send Ajax requests using the HTTP service and process JSON for the index controller, mainIndexCtrl.js 
+
+* Inject the HTTP service for Ajax requests.
+	```
+	var IndexCtrl = function($scope, $location, $http){
+	```
+* Display "Loading" message until backend replies.  
+	```
+	 {name: 'Loading Products...', description: '', price: 149.99}
+	```
+* Create Ajax handlers.  
+
+	```
+	productsHandler = function(data){
+        $scope.products = data
+        console.log('Successfully loaded products.')
+    };
+
+    errorHandler = function(){
+        console.error('Failed to load products.');
+    };
+
+    loadPosts = function(){
+        $http.get('./products.json')
+            .success(productsHandler)
+            .error(errorHandler)
+    };
+
+    loadPosts();
+	```
+	
