@@ -1,23 +1,9 @@
 var IndexCtrl = function($scope, $location, $http, productData){
     // Create a set of products
-    $scope.products = productData;
+    $scope.data = productData;
 
-    productsHandler = function(data){
-        $scope.products = data
-        console.log('Successfully loaded products.')
-    };
-
-    errorHandler = function(){
-        console.error('Failed to load products.');        
-    };
-
-    loadPosts = function(){
-        $http.get('./products.json')
-            .success(productsHandler)
-            .error(errorHandler)
-    };
-
-    //loadPosts();
+    // Call the service method to get the Product data from the API.
+    productData.loadProducts();
 
     $scope.viewProduct = function(productId){
         $location.url('/product/'+productId);

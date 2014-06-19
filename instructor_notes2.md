@@ -55,5 +55,60 @@ var ProductCtrl  = function($scope, $routeParams, productData) {
 };
 ```
 
+## Loading Product data using the service.
+We are going to move the ajax code that loads the Product JSON from Rails to the productData service we created above. 
+
+* Move Ajax code from controlllers/main/mainIndexCtrl to the services, in services/main/productData.js
+
+Update the productData service in services/main/productData.js.
 
 
+```
+  var productData = {
+        products:  [{name: 'Initializing Products...', description: '', price: \
+149.99}]
+    };
+    productsHandler = function(data){
+        productData.products = data
+        console.log('Successfully loaded products.')
+    };
+
+    errorHandler = function(){
+        console.error('Failed to load products.');
+    };
+
+    productData.loadProducts = function(){
+        $http.get('./products.json')
+            .success(productsHandler)
+            .error(errorHandler)
+    };
+
+    return productData;
+
+``` 
+
+Update the index controller, controllers/main/mainIndexCtrl.js  
+
+```
+var IndexCtrl = function($scope, $location, $http, productData){
+    // Create a set of products                                                 
+    $scope.data = productData;
+
+    // Call the service method to get the Product data from the API.            
+    productData.loadProducts();
+
+    $scope.viewProduct = function(productId){
+	$location.url('/product/'+productId);
+
+    };
+};
+
+
+
+```
+
+Update the main index template, app/templates/mainProduct.html.
+
+```
+	<div class="row" ng-repeat="product in data.products">
+```
