@@ -1,4 +1,5 @@
-var ProductCtrl  = function($scope, $routeParams) {
-  $scope.product = {name: 'Flask', description: 'Red Leather', price: 23.00 };
-  $scope.productId = $routeParams.productId;
+var ProductCtrl  = function($scope, $routeParams, productData) {
+  $scope.product = productData.products[$routeParams.productId];
+
+  productData.loadProducts();
 };
