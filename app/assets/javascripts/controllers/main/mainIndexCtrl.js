@@ -9,4 +9,9 @@ var IndexCtrl = function($scope, $location, $http, productData){
         $location.url('/product/'+productId);
 
     };
+
+    // New product
+    $scope.navNewProduct = function(){
+        $location.url('/product/new');
+    };
 };

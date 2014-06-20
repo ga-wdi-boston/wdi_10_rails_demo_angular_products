@@ -1,8 +1,19 @@
-<h1 class="text-center">My Product</h1>
-<!-- ng-repeat will create the below html for each product -->
-<div class="row" ng-repeat="product in data.products">
-  <!-- The $index is provided by the ng-repeat directive -->
-  <!-- It gives you the index/offset of the current product. -->
-  <h2><a ng-click="viewProduct($index)">{{ product.name }}</a></h2>
-  <p>{{ product.description }}</p>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <a href="#" class="brand">My Products</a>
+    <ul class="nav pull-right">
+      <li><a ng-click="navNewProduct()">New Product</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="container" style="margin-top 40px"> 
+  <h1 class="text-center">My Product</h1>
+  <!-- ng-repeat will create the below html for each product -->
+  <div class="row" ng-repeat="product in products">
+    <!-- The $index is provided by the ng-repeat directive -->
+    <!-- It gives you the index/offset of the current product. -->
+    <h2><a ng-click="viewProduct($index)">{{ product.name }}</a></h2>
+    <p>{{ product.description }}</p>
+  </div>
 </div>
