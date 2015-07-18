@@ -40,7 +40,7 @@ And create a Github repo.
 	mkdir -p ./filters/main
 	mkdir -p ./services/main
 	touch ./controllers/main/.keep ./directives/main/.keep 
-	touch ./filters/main/.keep ./services/main	
+	touch ./filters/main/.keep ./services/main/.keep	
 	```
 * Set the ng-app directive in the layout.  
 Signals that this is an angular app.
